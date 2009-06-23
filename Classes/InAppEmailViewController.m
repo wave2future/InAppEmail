@@ -10,7 +10,24 @@
 
 @implementation InAppEmailViewController
 
+- (void)viewDidLoad {
+	if ([MFMailComposeViewController canSendMail])
+		button.enabled = YES;
+}
+
 - (IBAction)buttonPressed {
+	MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = self;
+	[controller setSubject:@"In app email..."];
+	[controller setMessageBody:@"...a tutorial from mobileorchard.com" isHTML:NO];
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+	[self becomeFirstResponder];
+	[self dismissModalViewControllerAnimated:YES];
+	[controller release];
 }
 
 - (void)dealloc {
