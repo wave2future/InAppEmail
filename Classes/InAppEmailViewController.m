@@ -27,7 +27,6 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	[self becomeFirstResponder];
 	[self dismissModalViewControllerAnimated:YES];
-	[controller release];
 }
 
 - (void)dealloc {
